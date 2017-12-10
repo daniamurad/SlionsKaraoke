@@ -20,6 +20,7 @@ export class LearnScreen extends React.Component {
 
     constructor(props) {
       super(props);
+      this.audioFlag = 0;
       this.minValue = 0;
       this.vocalDuration = 0;
       this.sectionDuration = 0;
@@ -126,7 +127,9 @@ export class LearnScreen extends React.Component {
           // loaded successfully
           
           this.backingTrack.play((success) => {
+            this.audioFlag = 1;
           if (success) {
+            
             console.log('successfully finished playing');
           } else {
             console.log('playback failed due to audio decoding errors');
@@ -149,7 +152,9 @@ export class LearnScreen extends React.Component {
           // loaded successfully
           
           this.vocalsTrack.play((success) => {
+            this.audioFlag = 1;
           if (success) {
+            
             console.log('successfully finished playing');
           } else {
             console.log('playback failed due to audio decoding errors');
@@ -241,12 +246,15 @@ export class LearnScreen extends React.Component {
   
 
     navigateToPerform(){
+
+      console.log(' this.audioFlag', this.audioFlag );
+      if (this.audioFlag === 1){
       this.backingTrack.stop();
       this.vocalsTrack.stop();
       ToastAndroid.show('navigateToPerform', ToastAndroid.SHORT);
       console.log('timeout ID', this.timeoutId.length);
       BackgroundTimer.clearInterval(this.backgroundTimerId);
-
+      }
       this.props.navigation.navigate('Perform');
 
     }
