@@ -1,0 +1,16 @@
+rootProject.name = 'SlionsKaraoke'
+include ':react-native-voice'
+project(':react-native-voice').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-voice/android')
+include ':react-native-google-speech'
+project(':react-native-google-speech').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-google-speech/android')
+include ':react-native-sound'
+project(':react-native-sound').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sound/android')
+include ':react-native-background-timer'
+project(':react-native-background-timer').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-background-timer/android')
+include ':react-native-sound-player'
+project(':react-native-sound-player').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sound-player/android')
+include ':react-native-audio-streamer'
+project(':react-native-audio-streamer').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-audio-streamer/android')
+include ':app'
+include ':react-native-audio-streaming'
+project(':react-native-audio-streaming').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-audio-streaming/android')

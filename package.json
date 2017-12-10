@@ -1,0 +1,32 @@
+{
+  "name": "SlionsKaraoke",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "16.0.0",
+    "react-native": "0.50.4",
+    "react-native-audio-streamer": "0.0.9",
+    "react-native-audio-streaming": "^2.3.2",
+    "react-native-background-timer": "^2.0.0",
+    "react-native-google-speech": "^3.0.10",
+    "react-native-modal-dropdown": "^0.5.0",
+    "react-native-sound": "^0.10.4",
+    "react-native-sound-player": "^0.2.1",
+    "react-native-voice": "^0.2.5",
+    "react-navigation": "^1.0.0-beta.21"
+  },
+  "devDependencies": {
+    "babel-jest": "21.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "eslint-config-rallycoding": "^3.2.0",
+    "jest": "21.2.1",
+    "react-test-renderer": "16.0.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

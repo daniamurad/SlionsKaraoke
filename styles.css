@@ -1,0 +1,55 @@
+const styles = StyleSheet.create({ // TODO: make a separate stylesheet sourcefile
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+
+  },
+  MicImageStyle: {
+
+
+    width: 70,
+    height: 70 ,// TODO: make it as a percentage of screen
+    alignItems: 'center',
+    justifyContent: 'center',
+    right:10
+
+  },
+  
+  TextStyleTitleSLions:	{
+	  fontFamily: 'serif',
+    fontSize: 70,
+
+  },
+  TextStyleTitleKaraoke:	{
+	  fontSize: 30,
+  },
+
+  UsernameTextInput: {
+    height: 70, 
+    width:300,
+    backgroundColor: '#BFC9CA',  
+    alignSelf: 'center',
+    marginTop:40,
+    marginBottom:15
+  },
+
+  PasswordTextInput: {
+    height: 70, 
+    width:300,
+    backgroundColor: '#BFC9CA',  
+    alignSelf: 'center',
+    margin:10
+  },
+
+  LoginButton: {
+    height: 100,
+    alignSelf: 'center',
+    margin:10 
+  },
+
+  NewSignUp: {
+    alignSelf: 'center',
+  },
+  
+});

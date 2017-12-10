@@ -1,0 +1,96 @@
+{
+  "track_name": "Let It Go",
+  "artist": "Idina Menzel",
+  "album": "Frozen Soundtrack",
+  "vocals": "https://drive.google.com/open?id=1RKuq-tB8_OvZiXdMfJOkJg77_Isjz2tl",
+  "backing_track":"https://drive.google.com/open?id=1J5mZxNi3HP6EgpVFRp4hYp_7b7cwq8F1",
+  "sections": [
+      {"name": "Verse 1",
+       "lines": [
+          { "time_start":"3",
+            "time_end":"6.5",
+            "lyric_english": "The snow glows white on the mountain tonight",
+            "lyric_chinese":"今天晚上，山上的雪发出白光",
+            "lyric_pinyin":"jīn tiān wǎn shàng ， shān shàng dí xuě fā chū bái guāng",
+            "reference_translation":"the snow glows white on the mountain tonight"
+            },
+            {
+            "time_start":"6.5",
+            "time_end":"9.5",
+            "lyric_english": "Not a footprint to be seen",
+            "lyric_chinese":"不是被看见的脚印",
+            "lyric_pinyin":"bù shì bèi kàn jiàn dí jiǎo yìn",
+            "reference_translation":"not a footprint to be seen"
+            },
+            
+            {
+            "time_start":"9.5",
+            "time_end":"13.5",
+            "lyric_english": "A kingdom of isolation,", 
+            "lyric_chinese":"一个孤立的王国",
+            "lyric_pinyin":"yī gè gū lì dí wáng guó",
+            "reference_translation":"A kingdom of isolation"
+            },
+            {
+            "time_start":"13.5",
+            "time_end":"16.9",
+            "lyric_english": "and it looks like I'm the Queen",
+            "lyric_chinese":"看起来我是女王",
+            "lyric_pinyin":"kàn qǐ lái wǒ shì nǚ wáng",
+            "reference_translation":"and it looks like I'm the queen"
+            },
+            {
+            "time_start":"16.9",
+            "time_end":"24.3",
+            "lyric_english": "The wind is howling like this swirling storm inside",
+            "lyric_chinese":"风嚎叫像这里面旋转的风暴",
+            "lyric_pinyin":"fēng háo jiào xiàng zhè lǐ miàn xuán zhuǎn dí fēng bào",
+             "reference_translation":"the wind is howling like this swirling storm inside"
+            },
+            {
+            "time_start":"24.3",x
+            "time_end":"31",
+            "lyric_english": "Couldn't keep it in, Heaven knows I've tried",
+            "lyric_chinese":"无法保持在, 天知道我已经尝试过了",
+            "lyric_pinyin":"Wúfǎ bǎochí zài, Tiānzhīdào wǒ yǐjīng chángshìguòle",
+            "reference_translation":"couldn't keep it in heaven knows I tried"
+            }
+          ]
+        },
+        {"name": "Pre Chorus",
+        "lines":[
+          {"time_start":"31",
+          "time_end":"35.45",
+          "lyric_english": "Don't let them in,don't let them see",
+          "lyric_chinese":"不要让他们进来，不要让他们看到",
+          "lyric_pinyin":"Bùyào ràng tāmen jìnlái,Bùyào ràng tāmen kàn dào",
+          "reference_translation":"don't let them in don't let them see"
+          },
+          {
+          "time_start":"35.45",
+          "time_end":"38.7",
+          "lyric_english": "Be the good girl you always have to be",
+          "lyric_chinese":"成为你永远不得不成为的好女孩",
+          "lyric_pinyin":"Chéngwéi nǐ yǒngyuǎn bùdé bù chéngwéi de hǎo nǚhái",
+           "reference_translation":"be the good girl you always have to be"
+          },
+          {
+          "time_start":"38.7",
+          "time_end":"44.7",
+          "lyric_english": "Conceal, don't feel,don't let them know",
+          "lyric_chinese":"隐瞒，不感觉,不要让他们知道",
+          "lyric_pinyin":"Yǐnmán, bù gǎnjué,Bùyào ràng tāmen zhīdào",
+           "reference_translation":"conceal don't feel don't let them know"
+          },
+          {
+          "time_start":"45.2",
+          "time_end":"48.5",
+          "lyric_english": "Well now they know",
+          "lyric_chinese":"那么现在他们知道了",
+          "lyric_pinyin":"Nàme xiànzài tāmen zhīdàole",
+          "reference_translation":"now they know"
+          }
+        ]
+      }
+    ]
+  }
