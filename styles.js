@@ -275,7 +275,7 @@ GenreImageStyle: {
         stat: {
           textAlign: 'center',
           color: '#B0171F',
-          marginBottom: 1,
+          
         },
         button: {
           width: 30,

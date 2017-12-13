@@ -14,6 +14,7 @@ export class PerformScreen extends React.Component {
     constructor(props) {
       
       super(props);
+      //this.userSpeechResults = [];
       this.state = {
         recognized: '',
         pitch: '',
@@ -22,6 +23,8 @@ export class PerformScreen extends React.Component {
         started: '',
         results: [],
         partialResults: [],
+        userSpeechResults: [],
+        firstResult: '',
       };
       Voice.onSpeechStart = this.onSpeechStart.bind(this);
       Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
@@ -57,9 +60,15 @@ export class PerformScreen extends React.Component {
     }
   
     onSpeechResults(e) {
+      let userSpeechResults = this.state.userSpeechResults.slice();
+      userSpeechResults.push(e.value[0]);
       this.setState({
+        firstResult: e.value[0],
         results: e.value,
+        userSpeechResults: userSpeechResults
+        
       });
+      console.log('userSpeechResults', userSpeechResults);
     }
   
     onSpeechPartialResults(e) {
@@ -94,6 +103,7 @@ export class PerformScreen extends React.Component {
     async _stopRecognizing(e) {
       try {
         await Voice.stop();
+
       } catch (e) {
         console.error(e);
       }
@@ -101,6 +111,7 @@ export class PerformScreen extends React.Component {
   
     async _cancelRecognizing(e) {
       try {
+        
         await Voice.cancel();
       } catch (e) {
         console.error(e);
@@ -109,6 +120,7 @@ export class PerformScreen extends React.Component {
   
     async _destroyRecognizer(e) {
       try {
+        this.setState({ userSpeechResults: [] });
         await Voice.destroy();
       } catch (e) {
         console.error(e);
@@ -147,7 +159,7 @@ export class PerformScreen extends React.Component {
             <Image style={styles.StyleLearnSongIcon} source={require('./icons/frozen.jpg')}  />
         </View>
 <ScrollView>
-        <View style={{backgroundColor:'#BFC9CA', margin: 15, height: 300}}>
+        <View style={{backgroundColor:'#BFC9CA', margin: 10, height: 250}}>
 
         <Text
           style={styles.stat}>
@@ -167,22 +179,25 @@ export class PerformScreen extends React.Component {
           style={styles.stat}>
           {`Error: ${this.state.error}`}
         </Text>
-        <Text
+        {/* <Text
           style={styles.stat}>
           Results
-        </Text>
+        </Text> */}
 
         {this.state.results.map((result, index) => {
           return (
+            
+            
             <Text
               key={`result-${index}`}
               style={styles.stat}>
-              {result}
+              {/*{result}*/}
             </Text>
+            
           )
         })}
 
-           <Text
+           {/* <Text
           style={styles.stat}>
           Partial Results
         </Text>
@@ -194,19 +209,27 @@ export class PerformScreen extends React.Component {
               {result}
             </Text>
           )
-        })}
+        })} */}
+
+
+        <Text
+        style= {styles.stat}>
+        First element: 
+        </Text>
+
+        <Text
+        style={styles.stat}>
+        {this.state.userSpeechResults}
+        {/* {this.userSpeechResults.push(this.state.results[0])}
+        {console.log('user Speech results', this.userSpeechResults) } */}
+        </Text>        
+
 
         <Text
           style={styles.stat}>
           {`End: ${this.state.end}`}
         </Text>
 
-        <TouchableOpacity onPress={this._startRecognizing.bind(this)}>
-          <Image
-            style={styles.button}
-            source={require('./button.png')}
-          />
-          </TouchableOpacity>
 
           <TouchableHighlight onPress={this._stopRecognizing.bind(this)}>
           <Text
@@ -243,13 +266,13 @@ export class PerformScreen extends React.Component {
             flex: 1,
             flexDirection: 'row'
         }}>
-        {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Feedback')} style = {{alignSelf:'auto'}}>
+         <TouchableOpacity onPress={() => this.props.navigation.navigate('Feedback')} style = {{alignSelf:'auto'}}>
              <Image style={styles.PlayBackIcons} source={require('./icons/red_mic.gif')}  />
              </TouchableOpacity>
 
-        <TouchableOpacity onPress={this._testGoogle.bind(this)} style = {{alignSelf:'auto'}}>
+        <TouchableOpacity onPress={this._startRecognizing.bind(this)}>
              <Image style={styles.PlayBackIcons} source={require('./icons/red_mic.gif')}  />
-        </TouchableOpacity> */}
+        </TouchableOpacity> 
              </View>
             </View>
       );

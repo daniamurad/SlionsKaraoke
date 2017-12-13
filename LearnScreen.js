@@ -51,7 +51,18 @@ export class LearnScreen extends React.Component {
         this.setState({
           jsonData: responseData
         });
-        console.log('JSON DATA', this.state.jsonData.sections[this.noOfSections - 1].end_section);
+        console.log('JSON DATA', this.state.jsonData);
+
+        var data = responseData.sections.map(function(item) {
+          return item.lines.map(function(line) {
+            return {
+              start_time: line.time_start
+            };
+          });
+        });
+        console.log('JSON DATA DATA', data);
+
+
       });
       ToastAndroid.show('_readJson!', ToastAndroid.SHORT);
       
@@ -221,14 +232,6 @@ export class LearnScreen extends React.Component {
 
         //////////**********************///////
 
-
-        //Play song here
-        try {
-          //SoundPlayer.playSoundFile('letitgobacking', 'mp3');
-          //SoundPlayer.playSoundFile('letitgobacking', 'mp3');
-        } catch (e) {
-          console.log('cannot play the sound file', e);
-        }
 
         ToastAndroid.show(responseJson.track_name, ToastAndroid.SHORT);
     
