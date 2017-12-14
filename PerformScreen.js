@@ -1,7 +1,9 @@
 import React from 'react';
 import { ScrollView, StyleSheet,StackNavigator, Text, View , Image,TextInput , Button, TouchableOpacity, TouchableHighlight} from 'react-native';
-import SpeechTranslatorModule from 'react-native-google-speech';
 import Voice from 'react-native-voice';
+import stringSimilarity from 'string-similarity';
+import Sound from 'react-native-sound';
+import BackgroundTimer from 'react-native-background-timer';
 
 export class PerformScreen extends React.Component {
     static navigationOptions = {
@@ -14,7 +16,14 @@ export class PerformScreen extends React.Component {
     constructor(props) {
       
       super(props);
+
       //this.userSpeechResults = [];
+      this.timeoutIdStart = [];
+      this.timeoutIdEnd = [];
+      this.backingTrack = '';
+      this.lyricsEnglish = [];
+      this.noOfSections = 1;
+      //this.similarityScores = [];
       this.state = {
         recognized: '',
         pitch: '',
@@ -25,6 +34,8 @@ export class PerformScreen extends React.Component {
         partialResults: [],
         userSpeechResults: [],
         firstResult: '',
+        jsonData: '',
+        similarityScores: [],
       };
       Voice.onSpeechStart = this.onSpeechStart.bind(this);
       Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
@@ -33,8 +44,25 @@ export class PerformScreen extends React.Component {
       Voice.onSpeechResults = this.onSpeechResults.bind(this);
       Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
       Voice.onSpeechVolumeChanged = this.onSpeechVolumeChanged.bind(this);
+      this._startRecognizing =  this._startRecognizing.bind(this);
+      this._stopRecognizing = this._stopRecognizing.bind(this);
+      fetch('https://s3-ap-southeast-1.amazonaws.com/slionsbucket/letItGo.json').then((response) => response.json()).then((responseData) => {
+        this.setState({
+          jsonData: responseData
+        });
+        
+    for (let i = 0; i < 1; i++) {
+      for (let j = 0; j < this.state.jsonData.sections[0].lines.length; j++) {
+        this.lyricsEnglish.push(this.state.jsonData.sections[i].lines[j].lyric_english);
+      }
+    }
+      });
+
+
       this.flag = 0;
     }
+
+
 
     onSpeechStart(e) {
       this.setState({
@@ -62,13 +90,28 @@ export class PerformScreen extends React.Component {
     onSpeechResults(e) {
       let userSpeechResults = this.state.userSpeechResults.slice();
       userSpeechResults.push(e.value[0]);
+      console.log('userSpeechResults1', userSpeechResults[userSpeechResults.length - 1]);
+      console.log('userSpeechResults2', this.lyricsEnglish[userSpeechResults.length - 1]);
+      const userText = userSpeechResults[userSpeechResults.length - 1].toLowerCase();
+      const lyricText = this.lyricsEnglish[userSpeechResults.length - 1].toLowerCase();
+      const userTextWords = userText.split(' ');
+      const lyricTextWords = lyricText.split(' ');
+      console.log('userSpeechResults3', userTextWords);
+      console.log('userSpeechResults4', lyricTextWords);
+      let similarity = stringSimilarity.compareTwoStrings(userText, lyricText);
+      let similarityScores = this.state.similarityScores.slice();
+      similarityScores.push(similarity);
+      console.log('similarity', similarity);
+
       this.setState({
         firstResult: e.value[0],
         results: e.value,
-        userSpeechResults: userSpeechResults
+        userSpeechResults: userSpeechResults,
+        similarityScores: similarityScores
         
       });
-      console.log('userSpeechResults', userSpeechResults);
+      
+
     }
   
     onSpeechPartialResults(e) {
@@ -94,6 +137,17 @@ export class PerformScreen extends React.Component {
         end: ''
       });
       try {
+//////////**** NEW STUFF *//////////////////
+        console.log('_startRecognizing');
+        console.log('lyricsEnglish', this.lyricsEnglish);
+
+
+     
+
+
+
+//////****** *////////////////////////
+
         await Voice.start('en-US');
       } catch (e) {
         console.error(e);
@@ -121,6 +175,7 @@ export class PerformScreen extends React.Component {
     async _destroyRecognizer(e) {
       try {
         this.setState({ userSpeechResults: [] });
+        this.state.similarityScores = [];
         await Voice.destroy();
       } catch (e) {
         console.error(e);
@@ -137,7 +192,45 @@ export class PerformScreen extends React.Component {
     }
   
 
-    _testGoogle() {
+    _perform() {
+
+      console.log('perform start');
+
+     
+    //    for (let i = 0; i<this.noOfSections; i++){
+    // //     //var timeout=
+
+    //      for (let j = 0; j < this.state.jsonData.sections[this.noOfSections - 1].lines.length; j++) {
+    //       console.log('dataresponse', this.state.jsonData.sections[i].lines[j].lyric_english); 
+
+    //       this.timeoutIdStart[j] = BackgroundTimer.setTimeout(() => {
+    //         console.log('dataresponse', this.state.jsonData.sections[i].lines[j].lyric_english); 
+    //         console.log('stop recognition');
+    //   //      this._stopRecognizing(this);
+    //         console.log('start recognition');
+    //         this._startRecognizing(this);
+
+    //         console.log('start timer', (parseFloat(this.state.jsonData.sections[i].lines[j].time_start) + 0.25) * 1000);
+    //       }, (parseFloat(this.state.jsonData.sections[i].lines[j].time_start) + 0.25) * 1000);
+    //      }
+    //     }
+
+    //     for (let i = 0; i<this.noOfSections; i++){
+    //       //     //var timeout=
+      
+    //            for (let j = 0; j < this.state.jsonData.sections[this.noOfSections - 1].lines.length; j++) {
+    //             console.log('dataresponse', this.state.jsonData.sections[i].lines[j].lyric_english); 
+      
+    //             this.timeoutIdEnd[j] = BackgroundTimer.setTimeout(() => {
+    //               //this._stopRecognizing(this);
+    //               //this._startRecognizing(this);
+      
+    //               console.log('stop timer', (parseFloat(this.state.jsonData.sections[i].lines[j].time_start) - 0.25) * 1000);
+    //             }, (parseFloat(this.state.jsonData.sections[i].lines[j].time_start) - 0.25) * 1000);
+    //            }
+    //           }
+  
+      this._startRecognizing(this);
     }
     
     render() {
@@ -161,7 +254,7 @@ export class PerformScreen extends React.Component {
 <ScrollView>
         <View style={{backgroundColor:'#BFC9CA', margin: 10, height: 250}}>
 
-        <Text
+        {/* <Text
           style={styles.stat}>
           {`Started: ${this.state.started}`}
         </Text>
@@ -173,7 +266,7 @@ export class PerformScreen extends React.Component {
         <Text
           style={styles.stat}>
           {`Pitch: ${this.state.pitch}`}
-        </Text>
+        </Text> */}
 
         <Text
           style={styles.stat}>
@@ -219,16 +312,28 @@ export class PerformScreen extends React.Component {
 
         <Text
         style={styles.stat}>
-        {this.state.userSpeechResults}
+        {this.state.userSpeechResults[this.state.userSpeechResults.length-1]}
         {/* {this.userSpeechResults.push(this.state.results[0])}
         {console.log('user Speech results', this.userSpeechResults) } */}
-        </Text>        
-
+        </Text>  
 
         <Text
+        style= {styles.stat}>
+        Score: 
+        </Text>
+
+        <Text
+        style={styles.stat}>
+        {this.state.similarityScores[this.state.similarityScores.length - 1] * 100}
+        {/* {this.userSpeechResults.push(this.state.results[0])}
+        {console.log('user Speech results', this.userSpeechResults) } */}
+        </Text>       
+
+
+        {/* <Text
           style={styles.stat}>
           {`End: ${this.state.end}`}
-        </Text>
+        </Text> */}
 
 
           <TouchableHighlight onPress={this._stopRecognizing.bind(this)}>
@@ -270,7 +375,7 @@ export class PerformScreen extends React.Component {
              <Image style={styles.PlayBackIcons} source={require('./icons/red_mic.gif')}  />
              </TouchableOpacity>
 
-        <TouchableOpacity onPress={this._startRecognizing.bind(this)}>
+        <TouchableOpacity onPress={this._perform.bind(this)}>
              <Image style={styles.PlayBackIcons} source={require('./icons/red_mic.gif')}  />
         </TouchableOpacity> 
              </View>

@@ -3,9 +3,6 @@ import { StyleSheet,StackNavigator, Text, View , Image,TextInput , Button, Touch
   DeviceEventEmitter,
   NativeAppEventEmitter,
   Platform } from 'react-native';
-import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
-import SoundPlayer from 'react-native-sound-player';
-import RNAudioStreamer from 'react-native-audio-streamer';
 import BackgroundTimer from 'react-native-background-timer';
 import Sound from 'react-native-sound';
 
@@ -84,7 +81,7 @@ export class LearnScreen extends React.Component {
       
       ToastAndroid.show('_audioFile fetch json !', ToastAndroid.SHORT);
 
-      fetch('https://api.myjson.com/bins/t7vsv').then((response) => response.json()).then((responseJson) => {
+      fetch('https://s3-ap-southeast-1.amazonaws.com/slionsbucket/letItGo.json').then((response) => response.json()).then((responseJson) => {
         this.setState({
           jsonData: responseJson
         });
