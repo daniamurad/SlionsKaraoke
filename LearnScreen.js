@@ -44,7 +44,7 @@ export class LearnScreen extends React.Component {
 
     _readJson() {
       //ToastAndroid.show('_readJson', ToastAndroid.SHORT);
-      fetch('https://api.myjson.com/bins/t7vsv').then((response) => response.json()).then((responseData) => {
+      fetch('https://s3-ap-southeast-1.amazonaws.com/slionsbucket/letItGo.json').then((response) => response.json()).then((responseData) => {
         this.setState({
           jsonData: responseData
         });
